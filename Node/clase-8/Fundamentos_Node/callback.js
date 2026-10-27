@@ -1,38 +1,39 @@
-function soyAsincrona(){
-    setTimeout(function(micallback){
+function soyAsincrona(micallback) { // 1. Agregamos el parámetro
+    setTimeout(function() { // 2. Quitamos el parámetro de aquí
         console.log("Hola, soy una funcion asincrona");
         micallback();
-    }, 1000)
+    }, 1000);
 }
 
 console.log("Iniciando el proceso...");
 
-soyAsincrona(function(){
+soyAsincrona(function() {
     console.log("Terminando el proceso...");
 });
 
 
-
-function hola(nombre, micallback){
-    setTimeout(function(){
+function hola(nombre, micallback) {
+    setTimeout(function() {
         console.log("Hola " + nombre);
-        micallback();
-    }, 1000)
+        micallback(nombre);
+    }, 1000);
 }
 
-function adios(nombre, micallback){
-    setTimeout(function(){
+function adios(nombre, micallback) {
+    setTimeout(function() {
         console.log("Adios " + nombre);
-        otroCallback();
-    }, 1000)
+        micallback();
+    }, 1500);
 }
 
 console.log("Iniciando el proceso...");
-hola("Calos", function(nombre){
-    adios(nombre + function(){
-        console.log("Terminando el proceso...");
-    })
-})
 
-//hola('Carlos', function(){});
-//adios('Carlos', function(){};)
+hola("Carlos", function(nombreRecibido) { // 5. Recibimos el nombre
+    // 6. Corregimos la sintaxis: en vez de 'nombre + function', usamos una coma
+    adios(nombreRecibido, function() { 
+        console.log("Terminando el proceso...");
+    });
+});
+
+// adios('Carlos', function(){};); 
+// adios('Carlos', function(){});
